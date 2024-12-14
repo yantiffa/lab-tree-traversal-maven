@@ -75,12 +75,17 @@ public class BinaryTree<T> implements Iterable<T> {
     return new Iterator<T>() {
 
       public boolean hasNext() {
-        // STUB
-        return false;
+        return !stack.isEmpty();
       } // hasNext()
 
       public T next() {
-        // STUB
+        BinaryTreeNode<T> node = stack.pop();
+        T output = node.value;
+        BinaryTreeNode<T> current = stack.right;
+        while(current != null) {
+          stack.push(current);
+          current = current.left;
+        } //while
         return null;
       } // next()
     }; // new Iterator()
