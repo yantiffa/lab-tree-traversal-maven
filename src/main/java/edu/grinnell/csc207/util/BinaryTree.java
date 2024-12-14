@@ -2,6 +2,7 @@ package edu.grinnell.csc207.util;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.stack;
 
 /**
  * Simple binary trees.
@@ -73,7 +74,15 @@ public class BinaryTree<T> implements Iterable<T> {
    */
   public Iterator<T> iterator() {
     return new Iterator<T>() {
-      Stack<T> stack = new Stack<>();
+      Stack<BinaryTreeNode<T>> stack = new Stack<>();
+      
+      {
+        BinaryTreeNode<T> current = this.root;
+        while (current != null) {
+          stack.push(current);
+          current = current.left;
+        }
+      }
 
       public boolean hasNext() {
         return !stack.isEmpty();
